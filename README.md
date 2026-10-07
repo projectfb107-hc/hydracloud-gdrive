@@ -14,24 +14,27 @@ Gratuito, sem fins lucrativos, sem vínculo com o Hydra Launcher nem com o Googl
 
 | | |
 | --- | --- |
-| Sistema | Linux de 64 bits com pacotes **RPM**: Fedora, Nobara e parecidos |
+| Sistema | Linux de 64 bits (x86_64). Há pacote `.rpm`, `.deb` e AppImage |
 | Conta Hydra | Sim, a gratuita serve. Não precisa de assinatura |
 | Conta Google | Sim, a sua. Os saves vão para o seu Drive |
 
-Ainda não há pacote para Windows, Ubuntu/Debian, Arch ou Steam Deck. A versão para Windows está no [roadmap](#roadmap).
+Ainda não há versão para Windows nem pacote Flatpak ou Snap. Os dois estão no [roadmap](#roadmap).
 
 ## Instalar
 
-1. Baixe o arquivo `hydralauncher-X.Y.Z.x86_64.rpm` da [página de releases](https://github.com/projectfb107-hc/hydracloud-gdrive/releases/latest).
-2. Abra um terminal na pasta do download e instale:
+Baixe da [página de releases](https://github.com/projectfb107-hc/hydracloud-gdrive/releases/latest) o arquivo do seu sistema e instale pelo terminal, na pasta do download:
 
-   ```bash
-   sudo dnf install ./hydralauncher-*.x86_64.rpm
-   ```
+| Seu sistema | Arquivo | Comando |
+| --- | --- | --- |
+| Fedora, Nobara, Bazzite e parecidos | `hydralauncher-X.Y.Z.x86_64.rpm` | `sudo dnf install ./hydralauncher-*.x86_64.rpm` |
+| Ubuntu, Debian, Mint, Pop!_OS e parecidos | `hydralauncher_X.Y.Z_amd64.deb` | `sudo apt install ./hydralauncher_*_amd64.deb` |
+| Qualquer outro (Arch, openSUSE, Steam Deck...) | `hydralauncher-X.Y.Z.AppImage` | `chmod +x hydralauncher-*.AppImage && ./hydralauncher-*.AppImage` |
 
-   Já tem o Hydra oficial instalado na mesma versão? Use `reinstall` no lugar de `install`. Seus jogos, configurações e saves continuam onde estão.
+Já tem o Hydra oficial instalado na mesma versão? No Fedora, use `dnf reinstall` no lugar de `dnf install`; no Ubuntu, o `apt install` já substitui. Seus jogos, configurações e saves continuam onde estão.
 
-O pacote não é assinado, então instale pelo terminal: alguns atualizadores gráficos recusam pacotes sem assinatura.
+Os pacotes não são assinados, então instale pelo terminal: alguns instaladores gráficos recusam pacotes sem assinatura.
+
+O AppImage não instala nada: é um arquivo só, que você roda de onde quiser. Em algumas distribuições ele precisa do pacote `libfuse2` (ou `fuse2`). Se o seu sistema aceita `.rpm` ou `.deb`, prefira esses.
 
 ## Conectar o Google Drive
 
@@ -52,11 +55,7 @@ Com essa opção ligada, o Hydra baixa a versão **oficial** por cima desta, e a
 
 ## Atualizar
 
-Quando sair uma versão nova do Hydra, um pacote novo aparece na [página de releases](https://github.com/projectfb107-hc/hydracloud-gdrive/releases), normalmente no dia seguinte. Baixe e instale do mesmo jeito:
-
-```bash
-sudo dnf install ./hydralauncher-*.x86_64.rpm
-```
+Quando sair uma versão nova do Hydra, um pacote novo aparece na [página de releases](https://github.com/projectfb107-hc/hydracloud-gdrive/releases), normalmente no dia seguinte. Baixe o arquivo do seu sistema e instale com o mesmo comando da [instalação](#instalar). No AppImage, basta trocar o arquivo antigo pelo novo.
 
 Feche o Hydra antes e abra de novo depois.
 
@@ -93,8 +92,9 @@ Não. Eles existem só nos servidores do Hydra e ficam ocultos enquanto o modo G
 
 ## Limites conhecidos
 
-- **Só RPM**, por enquanto.
+- **Só Linux x86_64**, por enquanto, em `.rpm`, `.deb` e AppImage.
 - **Sem atualização automática.** É preciso baixar o pacote novo a cada versão.
+- O `.deb` e o AppImage são gerados pelo mesmo processo do `.rpm`, mas foram menos testados. Se algo falhar, abra uma [issue](https://github.com/projectfb107-hc/hydracloud-gdrive/issues).
 - **Até 100 contas Google** podem conectar enquanto o app não passar pela verificação do Google.
 - Arquivos de save antigos, que nenhuma versão guardada usa mais, continuam ocupando espaço no Drive. Saves são pequenos, então isso demora a pesar.
 - O card do Google Drive só existe na janela normal, não no Big Picture. A sincronização funciona nos dois.
@@ -104,7 +104,7 @@ Não. Eles existem só nos servidores do Hydra e ficam ocultos enquanto o modo G
 Planejado, sem data definida:
 
 - **Versão para Windows.** Um instalador `.exe` com o mesmo recurso do Google Drive.
-- Pacotes para outras distribuições Linux (`.deb` e AppImage).
+- Pacote Flatpak, para instalar pela loja de aplicativos e no Steam Deck.
 - O card do Google Drive também no modo Big Picture.
 - Limpeza dos arquivos de save que não são mais usados, para liberar espaço no Drive.
 - Verificação do app pelo Google, para tirar o limite de 100 contas.
@@ -135,26 +135,28 @@ Baseado no [Hydra Launcher](https://github.com/hydralauncher/hydra), de Los Brox
 
 **Hydra Launcher with your game saves kept in your own Google Drive.** A free, non-commercial build of [Hydra Launcher](https://github.com/hydralauncher/hydra) (MIT). Not affiliated with Hydra Launcher or Google.
 
-**Requirements:** 64-bit Linux with RPM packages (Fedora, Nobara and similar), a Hydra account (free is fine) and your own Google account.
+**Requirements:** 64-bit Linux (x86_64), a Hydra account (free is fine) and your own Google account.
 
-**Install**
+**Install:** pick the file for your system from [Releases](https://github.com/projectfb107-hc/hydracloud-gdrive/releases/latest).
 
 ```bash
-sudo dnf install ./hydralauncher-*.x86_64.rpm
+sudo dnf install ./hydralauncher-*.x86_64.rpm     # Fedora, Nobara, Bazzite
+sudo apt install ./hydralauncher_*_amd64.deb      # Ubuntu, Debian, Mint, Pop!_OS
+chmod +x hydralauncher-*.AppImage && ./hydralauncher-*.AppImage   # anything else
 ```
 
-Use `reinstall` if the official Hydra of the same version is already installed. The package is unsigned, so install it from a terminal.
+On Fedora, use `dnf reinstall` if the official Hydra of the same version is already installed. The packages are unsigned, so install them from a terminal. The AppImage may need `libfuse2`.
 
 **Connect:** Settings → Integrations → Google Drive → Connect, in the regular window (not Big Picture). Sign in with the Google account that should hold your saves. Hydra then syncs each game when you open its page, before launch and after you close it.
 
 **Turn off "Download updates automatically"** in Settings. Otherwise Hydra installs the official build over this one and the Google Drive option disappears until you reinstall. Your saves are not affected.
 
-**Update:** download the new RPM from [Releases](https://github.com/projectfb107-hc/hydracloud-gdrive/releases) and install it the same way. There is no automatic update.
+**Update:** download the new package from [Releases](https://github.com/projectfb107-hc/hydracloud-gdrive/releases) and install it the same way. There is no automatic update.
 
 **How it works:** the app asks only for Google's `drive.file` scope, so it can see just the files it created, in a folder named **Hydra Cloud Saves**. Saves go straight from your computer to Google. The 5 most recent versions of each game are kept. An empty cloud never deletes local saves: this build uploads instead.
 
-**Limits:** RPM only; no automatic update; up to 100 Google accounts until the app is verified by Google; the Drive card is not shown in Big Picture.
+**Limits:** Linux x86_64 only (the `.deb` and AppImage are less tested than the `.rpm`); no automatic update; up to 100 Google accounts until the app is verified by Google; the Drive card is not shown in Big Picture.
 
-**Roadmap** (planned, no dates): a **Windows version**, `.deb` and AppImage packages, the Drive card in Big Picture, cleanup of unused save files, and Google verification to lift the 100-account limit.
+**Roadmap** (planned, no dates): a **Windows version**, a Flatpak package, the Drive card in Big Picture, cleanup of unused save files, and Google verification to lift the 100-account limit.
 
 [Privacy Policy](https://projectfb107-hc.github.io/hydracloud-gdrive/privacy.html) · [Terms of Service](https://projectfb107-hc.github.io/hydracloud-gdrive/terms.html) · [Issues](https://github.com/projectfb107-hc/hydracloud-gdrive/issues)
